@@ -1,4 +1,6 @@
+import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:flutter/material.dart';
+
 
 
 
@@ -10,9 +12,9 @@ static const name = 'home_screen';
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Placeholder(
-        
+    return  Scaffold(
+      body: Center(
+        child: Text(Environment.theMovieDbKey),
       )
     );
   }
