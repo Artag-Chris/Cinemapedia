@@ -12,10 +12,6 @@ static const name = 'home_screen';
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Center(
-        child: Text(Environment.theMovieDbKey),
-      )
-    );
+    return  Placeholder();
   }
 }
