@@ -32,5 +32,10 @@ MovieRepositoryImpl(this.datasource);
   Future<List<Movie>> getUpcoming({int page = 1}) {
    return datasource.getTopRated(page: page);
   }
+  
+  @override
+  Future<Movie> getMovieById(String id) {
+    return datasource.getMovieById(id);
+  }
 
 }
