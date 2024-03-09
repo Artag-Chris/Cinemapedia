@@ -9,6 +9,8 @@ final MoviesDatasource datasource;
 
 MovieRepositoryImpl(this.datasource);
 
+  get getMovie => null;
+
 
 
 
