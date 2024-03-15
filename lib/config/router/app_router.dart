@@ -20,3 +20,5 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
         ),
       ]),
 ]);
+
+//todo la ruta de series
