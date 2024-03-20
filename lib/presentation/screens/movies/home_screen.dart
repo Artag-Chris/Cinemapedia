@@ -1,4 +1,6 @@
 import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemapedia/presentation/widgets/series_horizontal_listview.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,6 +34,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedSeriesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -44,6 +47,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final popularMovies = ref.watch(popularMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
+
+    final topRatedSeries = ref.watch(topRatedSeriesProvider);
 
     return CustomScrollView(slivers: [
       const SliverAppBar(
@@ -91,7 +96,16 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 ref.read(topRatedMoviesProvider.notifier).loadNextPage();
               },
             ),
+            SeriesHorizontalListView(
+              series: topRatedSeries,
+              name: "Mejores Series",
+              overview: "desde siempre",
+              loadNextPage: () {
+                ref.read(topRatedSeriesProvider.notifier).loadNextPage();
+              },
+            ),
             const SizedBox(
+
               height: 50,
             )
           ],

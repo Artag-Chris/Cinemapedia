@@ -29,7 +29,7 @@ final response= await dio.get("/tv/top_rated", queryParameters: {"page": page});
 
 final seriesDbResponse = SeriesResponse.fromJson(response.data);
 
-List <Series> series = seriesDbResponse.results.map((result) => SeriesMapper.resultsToEntity(result)).toList();
+List <Series> series = seriesDbResponse.results.map((result) => SeriesMapper.seriesToEntity(result)).toList();
 return series;
   }
 
