@@ -19,6 +19,18 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
           },
         ),
       ]),
+      //TODO la ruta de series cambiar direccion y nombre
+         GoRoute(
+          path: 'serie/:id',
+          name: MovieScreen.name,
+          builder: (context, state) {
+            final movieId = state.pathParameters["id"] ?? "no-id";
+
+            return MovieScreen(
+              movieId: movieId,
+            );
+          },
+        ),
 ]);
 
 //todo la ruta de series
