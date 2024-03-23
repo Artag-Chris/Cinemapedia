@@ -1,12 +1,11 @@
 import 'package:cinemapedia/domain/entities/serie.dart';
-import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:cinemapedia/presentation/providers/series/series_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 final serieInfoProvider = StateNotifierProvider<SerieMapNotifier, Map<String, Serie>>((ref) {
   final serieRepository = ref.watch( seriesRepositoryProvider );
-  return SerieMapNotifier(getSerie: serieRepository.getSerieById );
+  return SerieMapNotifier(getSerie:serieRepository.getSerieById );
 });
 
 
@@ -23,7 +22,7 @@ typedef GetSerieCallback = Future<Serie>Function(String serieId);
 
 class SerieMapNotifier extends StateNotifier<Map<String,Serie>> {
 
-  final GetMovieCallback getSerie;
+  final GetSerieCallback getSerie;
 
   SerieMapNotifier({
     required this.getSerie,

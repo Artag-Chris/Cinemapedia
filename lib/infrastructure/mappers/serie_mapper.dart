@@ -1,7 +1,8 @@
 import 'package:cinemapedia/domain/entities/serie.dart';
 import 'package:cinemapedia/infrastructure/models/moviedb/serie_details.dart';
+import 'package:cinemapedia/infrastructure/models/moviedb/serie_moviedb.dart';
 
-//todo estudiar esto
+
 class SerieMapper {
   static Serie serieDBToEntity(SerieMovieDB serieMovieDB) => Serie(
         adult: serieMovieDB.adult,
@@ -22,13 +23,13 @@ class SerieMapper {
         voteAverage: serieMovieDB.voteAverage,
         createdBy: serieMovieDB.createdBy.map((e) => e.toJson()).toList(),
         episodeRunTime:
-            serieMovieDB.episodeRunTime.map((e) => e.toString()).toList(),
-        genres: serieMovieDB.genreIds.map((e) => e.toString()).toList(),
+            serieMovieDB.episodeRunTime.map((e) => e.toInt()).toList(),
+        genres: serieMovieDB.genres.map((e) => e.toString()).toList(),
         homepage: serieMovieDB.homepage,
         inProduction: serieMovieDB.inProduction,
         languages: serieMovieDB.languages.map((e) => e.toString()).toList(),
         lastAirDate: serieMovieDB.lastAirDate,
-        lastEpisodeToAir: serieMovieDB.lastEpisodeToAir.toJson(),
+        lastEpisodeToAir: serieMovieDB.lastEpisodeToAir,
         nextEpisodeToAir: serieMovieDB.nextEpisodeToAir,
          networks: serieMovieDB.networks.map((e) => e.toJson()).toList(), 
          numberOfEpisodes: serieMovieDB.numberOfEpisodes, 
@@ -63,7 +64,7 @@ class SerieMapper {
         voteAverage: serieMovieDB.voteAverage,
         createdBy: serieMovieDB.createdBy.map((e) => e.toJson()).toList(),
         episodeRunTime:
-            serieMovieDB.episodeRunTime.map((e) => e.toString()).toList(),
+            serieMovieDB.episodeRunTime.map((e) => e.toInt()).toList(),
         genres: serieMovieDB.genres,
         homepage: serieMovieDB.homepage,
         inProduction: serieMovieDB.inProduction,

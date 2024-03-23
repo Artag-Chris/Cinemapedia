@@ -1,6 +1,7 @@
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/series_datasource.dart';
 import 'package:cinemapedia/domain/entities/serie.dart';
+import 'package:cinemapedia/infrastructure/mappers/serie_mapper.dart';
 import 'package:cinemapedia/infrastructure/mappers/series_mapper.dart';
 import 'package:cinemapedia/infrastructure/models/moviedb/serie_details.dart';
 import 'package:cinemapedia/infrastructure/models/moviedb/series_response.dart';

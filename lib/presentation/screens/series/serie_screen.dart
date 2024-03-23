@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/serie.dart';
 
 import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemapedia/presentation/providers/series/serie_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,14 +23,15 @@ class SerieScreenState extends ConsumerState<SerieScreen> {
   void initState() {
     super.initState();
     //todo adecuar providers
-    ref.read(movieInfoProvider.notifier).loadMovie(widget.serieId);
-    ref.read(actorsByMovieProvider.notifier).loadActors(widget.serieId);
+//    ref.read(movieInfoProvider.notifier).loadMovie(widget.serieId);
+  //  ref.read(actorsByMovieProvider.notifier).loadActors(widget.serieId);
+    ref.read(serieInfoProvider.notifier).loadSerie(widget.serieId);
   }
 
   @override
   Widget build(BuildContext context) {
     //todo: crear entidad serie
-    final Serie? serie = ref.watch(movieInfoProvider)[widget.serieId];
+    final Serie? serie = ref.watch(serieInfoProvider)[widget.serieId];
 
     if (serie == null) {
       return const Scaffold(
@@ -97,7 +99,7 @@ class _SerieDetails extends StatelessWidget {
       Padding(
           padding: const EdgeInsets.all(8),
           child: Wrap(children: [
-            ...serie.genreIds.map((gender) => Container(
+            ...serie.genres.map((gender) => Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: Chip(
                     label: Text(gender),
