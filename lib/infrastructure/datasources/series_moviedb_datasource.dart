@@ -39,7 +39,7 @@ return series;
    @override
   Future<Serie> getSerieById(String id) async {
     final response = await dio.get(
-      "/serie/$id",
+      "/tv/$id",
     );
     if (response.statusCode != 200) throw Exception("Error al cargar la informacion");
 

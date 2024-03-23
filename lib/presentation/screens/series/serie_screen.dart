@@ -102,7 +102,7 @@ class _SerieDetails extends StatelessWidget {
             ...serie.genres.map((gender) => Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: Chip(
-                    label: Text(gender),
+                    label: Text(gender.toString()),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                   ),

@@ -13,7 +13,7 @@ class SerieDetails {
     final String backdropPath;
     final List<dynamic> createdBy;
     final List<int> episodeRunTime;
-    final DateTime firstAirDate;
+    final dynamic firstAirDate;
     final List<dynamic> genres;
     final String homepage;
     final int id;
@@ -279,7 +279,7 @@ class Network {
 
     factory Network.fromJson(Map<String, dynamic> json) => Network(
         id: json["id"],
-        logoPath: json["logo_path"],
+        logoPath: json["logo_path"]??"no logo",
         name: json["name"],
         originCountry: json["origin_country"],
     );
