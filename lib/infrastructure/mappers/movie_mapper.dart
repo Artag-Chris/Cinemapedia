@@ -23,7 +23,9 @@ static Movie movieDBToEntity (MovieMovieDB movieDB)=>Movie(
   backdropPath:( movieDB.backdropPath !="")
   ?"https://image.tmdb.org/t/p/w500${movieDB.backdropPath}"
   :"https://th.bing.com/th/id/OIP.Sbq_JGR8ht94tFH1gnUYqgHaHa?w=177&h=180&c=7&r=0&o=5&pid=1.7",
-  releaseDate: movieDB.releaseDate,
+  releaseDate: movieDB.releaseDate !=null
+  ?movieDB.releaseDate!
+  :DateTime.now(),
   voteAverage: movieDB.voteAverage
 );
 
