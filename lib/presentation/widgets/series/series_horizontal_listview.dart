@@ -116,12 +116,12 @@ class _Slide extends StatelessWidget {
           child: Row(children: [
             Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
             const SizedBox(width: 5),
-            Text(serie.popularity.toString(),
+            Text(HumanFormat.number(serie.popularity,1),
                 style: textStyles.bodyMedium
                     ?.copyWith(color: Colors.yellow.shade800)),
             const SizedBox(width: 10),
             const Spacer(),
-            Text(HumanFormat.number(serie.popularity.toDouble()),
+            Text(HumanFormat.number(serie.popularity,1),
                 style: textStyles.bodyMedium?.copyWith(color: Colors.black87))
           ]),
         )
