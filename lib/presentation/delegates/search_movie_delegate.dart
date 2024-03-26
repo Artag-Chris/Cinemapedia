@@ -1,6 +1,7 @@
 
 
 import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/config/helpers/human_format.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,7 @@ final movies = snapshot.data??[];
 SizedBox(
   width: size.width * 0.2,
   child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
+    borderRadius: BorderRadius.circular(10),
     child: Image.network(
       movies.posterPath,
        fit: BoxFit.cover,
@@ -96,9 +97,18 @@ SizedBox(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
 Text(movies.title, style: textStyles.titleLarge),
-(movies.overview.length > 150)
-?Text("${movies.overview.substring(0, 150)}...")
+(movies.overview.length > 120)
+?Text("${movies.overview.substring(0, 120)}...")
 :Text(movies.overview),
+Row(
+  children: [
+    Icon(Icons.star, color: Colors.yellow.shade800),
+    const SizedBox(width: 5),
+
+    Text(HumanFormat.number(movies.voteAverage,1), style: textStyles.titleMedium!.copyWith(color: Colors.yellow.shade900)),
+  ],
+)
+
     ],
   ),
 ),
