@@ -57,7 +57,9 @@ final movies = snapshot.data??[];
     itemBuilder: (context, index) {
       
 
-      return _MovieItem(movies: movies[index]);
+      return _MovieItem(
+        movies: movies[index],
+        onMovieSelected: close,);
     }
   
    );
@@ -66,8 +68,11 @@ final movies = snapshot.data??[];
 
 
   class _MovieItem extends StatelessWidget {
+
     final Movie movies;
-    const _MovieItem({required this.movies});
+final Function onMovieSelected;
+
+    const _MovieItem({required this.movies, required this.onMovieSelected});
   
     @override
     Widget build(BuildContext context) {
@@ -75,44 +80,49 @@ final movies = snapshot.data??[];
       final textStyles = Theme.of(context).textTheme;
       final size = MediaQuery.of(context).size;
 
-      return  Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Row(children: [
+      return  GestureDetector(
 
-SizedBox(
-  width: size.width * 0.2,
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(10),
-    child: Image.network(
-      movies.posterPath,
-       fit: BoxFit.cover,
-       loadingBuilder: (context, child, loadingProgress) => FadeIn(child: child),),
-  ),
-),
+        onTap: () => onMovieSelected(context,movies),
 
-const SizedBox(width: 10,),
-
-SizedBox(
-  width: (size.width - 40) * 0.7,
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-Text(movies.title, style: textStyles.titleLarge),
-(movies.overview.length > 120)
-?Text("${movies.overview.substring(0, 120)}...")
-:Text(movies.overview),
-Row(
-  children: [
-    Icon(Icons.star, color: Colors.yellow.shade800),
-    const SizedBox(width: 5),
-
-    Text(HumanFormat.number(movies.voteAverage,1), style: textStyles.titleMedium!.copyWith(color: Colors.yellow.shade900)),
-  ],
-)
-
-    ],
-  ),
-),
-
-      ]),);
+        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Row(children: [
+      
+      SizedBox(
+        width: size.width * 0.2,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+        movies.posterPath,
+         fit: BoxFit.cover,
+         loadingBuilder: (context, child, loadingProgress) => FadeIn(child: child),),
+        ),
+      ),
+      
+      const SizedBox(width: 10,),
+      
+      SizedBox(
+        width: (size.width - 40) * 0.7,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+      Text(movies.title, style: textStyles.titleLarge),
+      (movies.overview.length > 120)
+      ?Text("${movies.overview.substring(0, 120)}...")
+      :Text(movies.overview),
+      Row(
+        children: [
+          Icon(Icons.star, color: Colors.yellow.shade800),
+          const SizedBox(width: 5),
+      
+          Text(HumanFormat.number(movies.voteAverage,1), style: textStyles.titleMedium!.copyWith(color: Colors.yellow.shade900)),
+        ],
+      )
+      
+          ],
+        ),
+      ),
+      
+        ]),),
+      );
     }
   }
