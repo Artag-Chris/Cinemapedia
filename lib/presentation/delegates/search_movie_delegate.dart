@@ -54,17 +54,55 @@ final movies = snapshot.data??[];
   return ListView.builder(
     itemCount: movies.length,
     itemBuilder: (context, index) {
-      final movie = movies[index];
+      
 
-      return ListTile(
-        title: Text(movie.title),
-      );
+      return _MovieItem(movies: movies[index]);
     }
   
    );
   });
+  }}
+
+
+  class _MovieItem extends StatelessWidget {
+    final Movie movies;
+    const _MovieItem({required this.movies});
+  
+    @override
+    Widget build(BuildContext context) {
+
+      final textStyles = Theme.of(context).textTheme;
+      final size = MediaQuery.of(context).size;
+
+      return  Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Row(children: [
+
+SizedBox(
+  width: size.width * 0.2,
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(20),
+    child: Image.network(
+      movies.posterPath,
+       fit: BoxFit.cover,
+       loadingBuilder: (context, child, loadingProgress) => FadeIn(child: child),),
+  ),
+),
+
+const SizedBox(width: 10,),
+
+SizedBox(
+  width: (size.width - 40) * 0.7,
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+Text(movies.title, style: textStyles.titleLarge),
+(movies.overview.length > 150)
+?Text("${movies.overview.substring(0, 150)}...")
+:Text(movies.overview),
+    ],
+  ),
+),
+
+      ]),);
+    }
   }
-
-
-
-}
