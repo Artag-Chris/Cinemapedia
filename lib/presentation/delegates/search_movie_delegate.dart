@@ -10,12 +10,15 @@ import 'package:flutter/material.dart';
 typedef SearchMovieCallback =  Future<List<Movie>>Function(String query);
 class SearchMovieDelegate extends SearchDelegate <Movie?>{
 
+final List<Movie> initialMovies;
   final SearchMovieCallback searchMovie;
 StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
 Timer? _debounceTimer;
 
+
 SearchMovieDelegate({
-  required this.searchMovie
+  required this.searchMovie,
+  required this.initialMovies
 });
 
 
@@ -27,10 +30,12 @@ void _onQueryChanged(String query){
  if(_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
  
   _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
+/*
  if(query.isEmpty){
   debouncedMovies.add([]);
   return;
  }
+*/
 final movies = await searchMovie(query);
  debouncedMovies.add(movies);
 
@@ -73,6 +78,7 @@ icon: const Icon(Icons.arrow_back));
 
     _onQueryChanged(query);
  return     StreamBuilder(
+  initialData: initialMovies,
 stream: debouncedMovies.stream,
  // future: searchMovie(query), 
   builder: (context, snapshot) {
