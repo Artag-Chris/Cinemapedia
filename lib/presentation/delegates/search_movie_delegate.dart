@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/config/helpers/human_format.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
@@ -9,11 +11,31 @@ typedef SearchMovieCallback =  Future<List<Movie>>Function(String query);
 class SearchMovieDelegate extends SearchDelegate <Movie?>{
 
   final SearchMovieCallback searchMovie;
-
+StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
+Timer? _debounceTimer;
 
 SearchMovieDelegate({
   required this.searchMovie
 });
+
+
+void clearStreams(){
+  debouncedMovies.close();
+}
+
+void _onQueryChanged(String query){
+ if(_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+ 
+  _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
+ if(query.isEmpty){
+  debouncedMovies.add([]);
+  return;
+ }
+final movies = await searchMovie(query);
+ debouncedMovies.add(movies);
+
+  });
+}
 
 @override
 String get searchFieldLabel => "Buscar Película";
@@ -34,7 +56,10 @@ String get searchFieldLabel => "Buscar Película";
 
   @override
   Widget? buildLeading(BuildContext context) {
-return IconButton(onPressed: ()=>close(context, null), 
+
+return IconButton(onPressed: (){
+  clearStreams();
+  close(context, null);}, 
 icon: const Icon(Icons.arrow_back));
   }
 
@@ -45,8 +70,11 @@ icon: const Icon(Icons.arrow_back));
 
   @override
   Widget buildSuggestions(BuildContext context) {
- return     FutureBuilder(
-  future: searchMovie(query), 
+
+    _onQueryChanged(query);
+ return     StreamBuilder(
+stream: debouncedMovies.stream,
+ // future: searchMovie(query), 
   builder: (context, snapshot) {
   
 final movies = snapshot.data??[];
@@ -59,7 +87,9 @@ final movies = snapshot.data??[];
 
       return _MovieItem(
         movies: movies[index],
-        onMovieSelected: close,);
+        onMovieSelected: (context, movie)  {
+          clearStreams();
+          close(context, movie);});
     }
   
    );
