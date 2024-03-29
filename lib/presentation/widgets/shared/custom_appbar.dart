@@ -27,7 +27,7 @@ class CustomAppbar extends ConsumerWidget {
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    'Cinemapedia',
+                    'CineArtag',
                     style: titleStyle,
                   ),
                   const Spacer(),
