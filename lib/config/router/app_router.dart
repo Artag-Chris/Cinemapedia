@@ -3,6 +3,36 @@ import 'package:cinemapedia/presentation/views/views.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(initialLocation: '/', routes: [
+
+//TODO la ruta de series cambiar direccion y nombre en StatefulShellRoute
+
+ShellRoute(
+  builder:
+      (BuildContext context, GoRouterState state, Widget child) {
+    return Scaffold(
+      body: child,
+      /* ... */
+      bottomNavigationBar: BottomNavigationBar(
+      /* ... */
+      ),
+    );
+  },
+  routes: <RouteBase>[
+    GoRoute(
+      path: 'details',
+      builder: (BuildContext context, GoRouterState state) {
+        return const DetailsScreen();
+      },
+    ),
+  ],
+),
+
+
+
+
+
+
+  /*
   GoRoute(
       path: '/',
       name: HomeScreen.name,
@@ -31,7 +61,8 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
               serieId: serieId,
             );
           },
-        ),
-]);
+        ),*/
+]
+);
 
 //todo la ruta de series
