@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 final appRouter = GoRouter(initialLocation: '/', routes: [
 
 //TODO la ruta de series cambiar direccion y nombre en StatefulShellRoute
-//nuevo commit 
+
 
 
 ShellRoute(
